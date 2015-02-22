@@ -7,4 +7,4 @@ All the pokemon data was retrieved through [PokeAPI](http://pokeapi.co/), a REST
 
 To run it locally you'll need to install the latest versions of [Shiny](http://shiny.rstudio.com/) and [ggplot2](http://ggplot2.org/).
 
-The applet was made as a project for Coursera's class on Developing Data Products, and it is published in https://dapregi.shinyapps.io/pkmn/ and http://rpubs.com/... .
+The applet was made as a project for Coursera's class on Developing Data Products, and it is published in https://dapregi.shinyapps.io/pkmn/ and http://rpubs.com/dapregi/62592.
