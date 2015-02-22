@@ -3,7 +3,7 @@ This is the source code for a pokemon explorer app which runs on R and Shiny.
 This app allows you to filter and plot pokemon data depending on different variables. 
 In addition, you can export your filtered data.
 
-All the pokemon data was retrieved through [PokeAPI](http://pokeapi.co/), a RESTful API for [Pokemon](http://en.wikipedia.org/wiki/Pok%C3%A9mon). This data show some basic stats for each of the first 151 pokemon.
+All the pokemon data was retrieved through [PokeAPI](http://pokeapi.co/), a RESTful API for [Pokemon](http://en.wikipedia.org/wiki/Pok%C3%A9mon). This data show some basic stats for each of the 151 first pokemon.
 
 To run it locally you'll need to install the latest versions of [Shiny](http://shiny.rstudio.com/) and [ggplot2](http://ggplot2.org/).
 
