@@ -1,0 +1,48 @@
+
+# PokeShiny
+
+## Introduction
+
+This app allows you filtering and plotting pokemon data, depending on different variables.
+
+All the pokemon data was retrieved through PokeAPI, a RESTful API for Pokemon. This data show some basic stats for each of the 151 first pokemon.
+
+## Source code
+
+The source code can be found at https://github.com/dapregi/PokeShiny.
+
+## Getting started
+
+### Data Table
+
+This tab panel shows the data in a table, ready for filtering purposes.
+
+On the left, different slidebars can be used to establish different thresholds for different features. For each feature a minimum and a maximum value can be specified.
+
+Another way to filter data is using the textboxes that are under every column of the table. Using these textboxes, data can be filtered by word matching.
+
+Once data is filtered, the resulting table can be downloaded.
+
+**[NOTE]**: Take into account that the filtered data will be passed to the next tabs for plotting.
+
+## Scatter Plot
+
+This tab plots a scatter plot for filtered data.
+
+On the left, features for X and Y axis can be selected.
+
+Colouring per pokemon type and a regression line can be added by selecting the corresponding checkboxes.
+
+## Histogram
+
+This tab plots a histogram for filtered data.
+
+On the left, feature to plot can be selected.
+
+Bin width can be specified, as well.
+
+On the "Misc" menu some extra options can be found:
+* Add a density line
+* Colour by pokemon type
+* Colour by egg group
+
