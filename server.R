@@ -2,7 +2,7 @@ library(shiny)
 library(DT)
 library(ggplot2)
 
-df <- read.delim("./pkmn_info.txt", header = TRUE)
+df <- read.delim("./pkmn_info2.txt", header = TRUE)
 
 shinyServer(
   function(input, output){
@@ -12,7 +12,8 @@ shinyServer(
     
     output$data_table <- DT::renderDataTable({
       data_pkmn()
-    }, options = list(lengthMenu = seq(10, 50, 10), pageLength = 10))
+    }, options = list(lengthMenu = seq(10, 50, 10), pageLength = 10),
+    rownames = FALSE, filter = "top")
     
     output$scatterplot <- renderPlot({
       a <- ggplot(data_pkmn(), aes_string(x = input$x, y = input$y))
@@ -45,10 +46,20 @@ shinyServer(
     
     output$downloadData <- downloadHandler(
       filename = function() {
-        paste('pokemon-filtered-', Sys.Date(), '.txt')
+        paste('pokemon-filtered-', Sys.Date(), '.', input$output_format)
       },
       content = function(file) {
-        write.table(data_pkmn(), file, quote = FALSE, sep = "\t")
+        switch (input$output_format,
+                "csv" = {sep <- ","}, "tsv" = {sep <- "\t"})
+        write.table(data_pkmn(), file, quote = FALSE, sep = sep)
       }
     )
+    
+    output$field_checkbox <- renderUI({
+      checkboxGroupInput("field_checkbox",
+                         label = NULL,
+                         choices = unique(names(df)),
+                         selected = unique(names(df)))
+    })
+    
   })

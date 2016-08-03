@@ -21,7 +21,11 @@ shinyUI(
       sidebarPanel(
         conditionalPanel(
           'input.dataset === "Exploration"',
-          div(class = "option-header", "Filters"),
+          div(class = "option-header", "Fields"),
+          uiOutput("field_checkbox"),
+          div(class = "option-header", "Download"),
+          radioButtons("output_format", "File format:",
+                       choices = c("csv", "tsv")),
           downloadButton('downloadData', 'Download'),
           helpText("Download your filtered data table")
           ),
