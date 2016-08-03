@@ -22,9 +22,6 @@ shinyUI(
         conditionalPanel(
           'input.dataset === "Exploration"',
           div(class = "option-header", "Filters"),
-          uiOutput("hp_threshold"),
-          uiOutput("attack_threshold"),
-          uiOutput("defense_threshold"),
           downloadButton('downloadData', 'Download'),
           helpText("Download your filtered data table")
           ),
@@ -47,7 +44,7 @@ shinyUI(
         tabsetPanel(
           id='dataset',
           tabPanel("Documentation", includeMarkdown("./documentation.Rmd")),
-          tabPanel("Exploration", dataTableOutput("data_table")),
+          tabPanel("Exploration", DT::dataTableOutput("data_table")),
           tabPanel("Scatter Plot", plotOutput("scatterplot")),
           tabPanel("Histogram", plotOutput("histogram"))
           )

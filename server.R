@@ -1,4 +1,5 @@
 library(shiny)
+library(DT)
 library(ggplot2)
 
 df <- read.delim("./pkmn_info.txt", header = TRUE)
@@ -6,15 +7,10 @@ df <- read.delim("./pkmn_info.txt", header = TRUE)
 shinyServer(
   function(input, output){
     data_pkmn <- reactive({
-      df[input$attack_threshold[1] <= df$attack &
-           df$attack <= input$attack_threshold[2] &
-           input$hp_threshold[1] <= df$hp &
-           df$hp <= input$hp_threshold[2] &
-           input$defense_threshold[1] <= df$defense &
-           df$defense <= input$defense_threshold[2], ]
+      df[, ]
       })
     
-    output$data_table <- renderDataTable({
+    output$data_table <- DT::renderDataTable({
       data_pkmn()
     }, options = list(lengthMenu = seq(10, 50, 10), pageLength = 10))
     
@@ -55,25 +51,4 @@ shinyServer(
         write.table(data_pkmn(), file, quote = FALSE, sep = "\t")
       }
     )
-
-    output$hp_threshold <- renderUI({
-      sliderInput("hp_threshold", label = "HP:",
-                  min = 0, max= max(df$hp, na.rm = TRUE),
-                  value = c(0, max(df$hp, na.rm = TRUE)),
-                  step = 1, round = 0)
-    })
-    
-    output$attack_threshold <- renderUI({
-      sliderInput("attack_threshold", label = "Attack:",
-                  min = 0, max = max(df$attack, na.rm = TRUE),
-                  value = c(0, max(df$attack, na.rm = TRUE)),
-                  step = 1, round = 0)
-    })
-    
-    output$defense_threshold <- renderUI({
-      sliderInput("defense_threshold", label = "Defense:",
-                  min = 0, max = max(df$defense, na.rm = TRUE),
-                  value = c(0, max(df$defense, na.rm = TRUE)),
-                  step = 1, round = 0)
-    })
   })
