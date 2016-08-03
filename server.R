@@ -6,37 +6,28 @@ df <- read.delim("./pkmn_info.txt", header = TRUE)
 shinyServer(
   function(input, output){
     data_pkmn <- reactive({
-      df[input$attack_threshold[1] <= df$attack & 
-           input$attack_threshold[2] >= df$attack &
-           !is.na(df$attack) &
-           input$hp_threshold[1] <= df$hp & 
-           input$hp_threshold[2] >= df$hp &
-           !is.na(df$hp) &
-           input$defense_threshold[1] <= df$defense & 
-           input$defense_threshold[2] >= df$defense &
-           !is.na(df$defense)
-         ,]
+      df[input$attack_threshold[1] <= df$attack &
+           df$attack <= input$attack_threshold[2] &
+           input$hp_threshold[1] <= df$hp &
+           df$hp <= input$hp_threshold[2] &
+           input$defense_threshold[1] <= df$defense &
+           df$defense <= input$defense_threshold[2], ]
       })
     
     output$data_table <- renderDataTable({
       data_pkmn()
-    },
-    options = list(lengthMenu = c(10, 20, 30, 40, 50), pageLength = 10))
+    }, options = list(lengthMenu = seq(10, 50, 10), pageLength = 10))
     
     output$scatterplot <- renderPlot({
       a <- ggplot(data_pkmn(), aes_string(x = input$x, y = input$y))
       a <- a + geom_point()
-      if (!input$type) {
-        a1 <- a
-      } else {
-        a1 <- a + facet_wrap(~type)
+      if (input$type) {
+        a <- a + facet_wrap(~type)
       }
-      if(!input$regression) {
-        a2 <- a1
-      } else {
-        a2 <- a1 + geom_smooth(method = 'lm', se = TRUE)
+      if(input$regression) {
+        a <- a + geom_smooth(method = 'lm', se = TRUE)
       }
-      a2
+      a
     })
     
     output$histogram <- renderPlot({
@@ -58,7 +49,7 @@ shinyServer(
     
     output$downloadData <- downloadHandler(
       filename = function() {
-        paste('pokemon-filtrated-', Sys.Date(), '.txt')
+        paste('pokemon-filtered-', Sys.Date(), '.txt')
       },
       content = function(file) {
         write.table(data_pkmn(), file, quote = FALSE, sep = "\t")
@@ -66,29 +57,23 @@ shinyServer(
     )
 
     output$hp_threshold <- renderUI({
-      sliderInput("hp_threshold",
-                  label = "HP:",
-                  min= 0,
-                  max= max(df$hp, na.rm = TRUE),
-                  value= c(0, max(df$hp, na.rm = TRUE)),
-                  step=1, round=0)
+      sliderInput("hp_threshold", label = "HP:",
+                  min = 0, max= max(df$hp, na.rm = TRUE),
+                  value = c(0, max(df$hp, na.rm = TRUE)),
+                  step = 1, round = 0)
     })
     
     output$attack_threshold <- renderUI({
-      sliderInput("attack_threshold",
-                  label = "Attack:",
-                  min = 0,
-                  max = max(df$attack, na.rm = TRUE),
+      sliderInput("attack_threshold", label = "Attack:",
+                  min = 0, max = max(df$attack, na.rm = TRUE),
                   value = c(0, max(df$attack, na.rm = TRUE)),
-                  step=1, round=0)
+                  step = 1, round = 0)
     })
     
     output$defense_threshold <- renderUI({
-      sliderInput("defense_threshold",
-                  label = "Defense:",
-                  min = 0,
-                  max = max(df$defense, na.rm = TRUE),
+      sliderInput("defense_threshold", label = "Defense:",
+                  min = 0, max = max(df$defense, na.rm = TRUE),
                   value = c(0, max(df$defense, na.rm = TRUE)),
-                  step=1, round=0)
+                  step = 1, round = 0)
     })
   })
