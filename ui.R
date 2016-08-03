@@ -1,33 +1,16 @@
 library(shiny)
 library(ggplot2)
 
-df <- read.delim("./pkmn_info.txt", header = TRUE)
-
 shinyUI(fluidPage(
-  titlePanel("Pokemon Data"),
+  titlePanel("Data"),
   br(),
   sidebarLayout(
     sidebarPanel(
     conditionalPanel(
       'input.dataset === "Data Table"',
-      sliderInput("hp_threshold",
-                  label = "HP:",
-                  min= 0,
-                  max= max(df$hp, na.rm = TRUE),
-                  value= c(0, max(df$hp, na.rm = TRUE)),
-                  step=1, round=0),
-      sliderInput("attack_threshold",
-                  label = "Attack:",
-                  min = 0,
-                  max = max(df$attack, na.rm = TRUE),
-                  value = c(0, max(df$attack, na.rm = TRUE)),
-                  step=1, round=0),
-      sliderInput("defense_threshold",
-                  label = "Defense:",
-                  min = 0,
-                  max = max(df$defense, na.rm = TRUE),
-                  value = c(0, max(df$defense, na.rm = TRUE)),
-                  step=1, round=0),
+      uiOutput("hp_threshold"),
+      uiOutput("attack_threshold"),
+      uiOutput("defense_threshold"),
       downloadButton('downloadData', 'Download'),
       helpText("Download your filtered data table")
       ),
@@ -45,8 +28,10 @@ shinyUI(fluidPage(
         selectInput("aes", "Misc:", c("None", "Density line", "Colour by Type", "Colour by Egg Group"), "None")
         )
       ),
+  
       mainPanel(tabsetPanel(
         id='dataset',
+        tabPanel("Documentation", includeMarkdown("./documentation.Rmd")),
         tabPanel("Data Table", dataTableOutput("data_table")),
         tabPanel("Scatter Plot", plotOutput("scatterplot")),
         tabPanel("Histogram", plotOutput("histogram"))

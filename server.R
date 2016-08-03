@@ -16,7 +16,7 @@ shinyServer(
            input$defense_threshold[2] >= df$defense &
            !is.na(df$defense)
          ,]
-      })  
+      })
     
     output$data_table <- renderDataTable({
       data_pkmn()
@@ -64,4 +64,31 @@ shinyServer(
         write.table(data_pkmn(), file, quote = FALSE, sep = "\t")
       }
     )
+
+    output$hp_threshold <- renderUI({
+      sliderInput("hp_threshold",
+                  label = "HP:",
+                  min= 0,
+                  max= max(df$hp, na.rm = TRUE),
+                  value= c(0, max(df$hp, na.rm = TRUE)),
+                  step=1, round=0)
+    })
+    
+    output$attack_threshold <- renderUI({
+      sliderInput("attack_threshold",
+                  label = "Attack:",
+                  min = 0,
+                  max = max(df$attack, na.rm = TRUE),
+                  value = c(0, max(df$attack, na.rm = TRUE)),
+                  step=1, round=0)
+    })
+    
+    output$defense_threshold <- renderUI({
+      sliderInput("defense_threshold",
+                  label = "Defense:",
+                  min = 0,
+                  max = max(df$defense, na.rm = TRUE),
+                  value = c(0, max(df$defense, na.rm = TRUE)),
+                  step=1, round=0)
+    })
   })
