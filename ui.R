@@ -22,12 +22,14 @@ shinyUI(
         conditionalPanel(
           'input.dataset === "Exploration"',
           div(class = "option-header", "Fields"),
+          helpText("Select the data you want to show"),
           uiOutput("field_checkbox"),
+          actionButton("show_fields", "Show"),
           div(class = "option-header", "Download"),
+          helpText("Export your filtered data table"),
           radioButtons("output_format", "File format:",
                        choices = c("csv", "tsv")),
-          downloadButton('downloadData', 'Download'),
-          helpText("Download your filtered data table")
+          downloadButton('downloadData', 'Download')
           ),
         conditionalPanel(
           'input.dataset === "Scatter Plot"',

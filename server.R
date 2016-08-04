@@ -6,14 +6,28 @@ df <- read.delim("./pkmn_info2.txt", header = TRUE)
 
 shinyServer(
   function(input, output){
-    data_pkmn <- reactive({
-      df[, ]
-      })
+    
+    data_pkmn <- eventReactive(input$show_fields, {
+      if (input$show_fields == 0) {
+        data.frame()
+      } else if (input$show_fields == 1) {
+        cols <- as.numeric(input$show_fields)
+        df2 <- data.frame(df[, cols])
+        names(df2) <- names(df)[cols]
+        df2
+      } else {
+        df[, input$field_checkbox] 
+      }
+    })
+    
+#     data_pkmn <- reactive({
+#       df[, ]
+#       })
     
     output$data_table <- DT::renderDataTable({
       data_pkmn()
-    }, options = list(lengthMenu = seq(10, 50, 10), pageLength = 10),
-    rownames = FALSE, filter = "top")
+    }, options = list(lengthMenu = seq(10, 50, 10), pageLength = 10, 
+                      orderClasses = TRUE), rownames = FALSE, filter = "top")
     
     output$scatterplot <- renderPlot({
       a <- ggplot(data_pkmn(), aes_string(x = input$x, y = input$y))
@@ -58,8 +72,8 @@ shinyServer(
     output$field_checkbox <- renderUI({
       checkboxGroupInput("field_checkbox",
                          label = NULL,
-                         choices = unique(names(df)),
-                         selected = unique(names(df)))
+                         choices = names(df),
+                         selected = names(df))
     })
     
   })
