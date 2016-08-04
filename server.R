@@ -24,13 +24,36 @@ shinyServer(
     data_pkmn <- reactive({
       df2 <- df
       if (!is.null(input$hp) & "hp" %in% fields()) {
-        df2 <- df2[input$hp[1] <= df2$hp & df2$hp <= input$hp[2], ]
+        df2 <- df2[input$hp[1] <= df2$hp &
+                     df2$hp <= input$hp[2], ]
       }
       if (!is.null(input$attack) & "attack" %in% fields()) {
-        df2 <- df2[input$attack[1] <= df2$attack & df2$attack <= input$attack[2], ]
+        df2 <- df2[input$attack[1] <= df2$attack &
+                     df2$attack <= input$attack[2], ]
       }
       if (!is.null(input$defense) & "defense" %in% fields()) {
-        df2 <- df2[input$defense[1] <= df2$defense & df2$defense <= input$defense[2], ]
+        df2 <- df2[input$defense[1] <= df2$defense &
+                     df2$defense <= input$defense[2], ]
+      }
+      if (!is.null(input$special.attack) & "special.attack" %in% fields()) {
+        df2 <- df2[input$special.attack[1] <= df2$special.attack &
+                     df2$special.attack <= input$special.attack[2], ]
+      }
+      if (!is.null(input$special.defense) & "special.defense" %in% fields()) {
+        df2 <- df2[input$special.defense[1] <= df2$special.defense &
+                     df2$special.defense <= input$special.defense[2], ]
+      }
+      if (!is.null(input$height) & "height" %in% fields()) {
+        df2 <- df2[input$height[1] <= df2$height &
+                     df2$height <= input$height[2], ]
+      }
+      if (!is.null(input$weight) & "weight" %in% fields()) {
+        df2 <- df2[input$weight[1] <= df2$weight &
+                     df2$weight <= input$weight[2], ]
+      }
+      if (!is.null(input$speed) & "speed" %in% fields()) {
+        df2 <- df2[input$speed[1] <= df2$speed &
+                     df2$speed <= input$speed[2], ]
       }
       df2[, fields()]
     })
@@ -38,7 +61,7 @@ shinyServer(
     output$data_table <- DT::renderDataTable({
       data_pkmn()
     }, rownames = FALSE,
-    options = list(lengthMenu = seq(10, 50, 10), pageLength = 10, 
+    options = list(lengthMenu = seq(10, 50, 10), pageLength = 20, 
                    orderClasses = TRUE))
     
     output$scatterplot <- renderPlot({
@@ -88,22 +111,21 @@ shinyServer(
                          selected = names(df))
     })
     
-#     output$hp <- renderUI({
-#       sliderInput("hp",
-#                   label = "HP:",
-#                   min = 0,
-#                   max = max(df$hp),
-#                   value = c(0, max(df$hp)),
-#                   step=1, round=0)
-#     })
-    
-    
-    output$ui <- renderUI({
+    output$filters <- renderUI({
       elements <- list()
+      if ("hp" %in% fields()) {
+        elements <- list(elements,
+                         list(sliderInput("hp",
+                                          label = "HP:",
+                                          min = 0,
+                                          max = max(df$hp),
+                                          value = c(0, max(df$hp)),
+                                          step=1, round=0)))
+      }
       if ("attack" %in% fields()) {
         elements <- list(elements,
                          list(sliderInput("attack",
-                                          label = "ATTACK:",
+                                          label = "Attack:",
                                           min = 0,
                                           max = max(df$attack),
                                           value = c(0, max(df$attack)),
@@ -112,13 +134,57 @@ shinyServer(
       if ("defense" %in% fields()) {
         elements <- list(elements,
                          list(sliderInput("defense",
-                                          label = "DEFENSE:",
+                                          label = "Defense:",
                                           min = 0,
                                           max = max(df$defense),
                                           value = c(0, max(df$defense)),
                                           step=1, round=0)))
       }
+      if ("special.attack" %in% fields()) {
+        elements <- list(elements,
+                         list(sliderInput("special.attack",
+                                          label = "Special attack:",
+                                          min = 0,
+                                          max = max(df$special.attack),
+                                          value = c(0, max(df$special.attack)),
+                                          step=1, round=0)))
+      }
+      if ("special.defense" %in% fields()) {
+        elements <- list(elements,
+                         list(sliderInput("special.defense",
+                                          label = "Special defense:",
+                                          min = 0,
+                                          max = max(df$special.defense),
+                                          value = c(0, max(df$special.defense)),
+                                          step=1, round=0)))
+      }
+      if ("height" %in% fields()) {
+        elements <- list(elements,
+                         list(sliderInput("height",
+                                          label = "Height:",
+                                          min = 0,
+                                          max = max(df$height),
+                                          value = c(0, max(df$height)),
+                                          step=1, round=0)))
+      }
+      if ("weight" %in% fields()) {
+        elements <- list(elements,
+                         list(sliderInput("weight",
+                                          label = "Weight:",
+                                          min = 0,
+                                          max = max(df$weight),
+                                          value = c(0, max(df$weight)),
+                                          step=1, round=0)))
+      }
+      if ("speed" %in% fields()) {
+        elements <- list(elements,
+                         list(sliderInput("speed",
+                                          label = "Speed:",
+                                          min = 0,
+                                          max = max(df$speed),
+                                          value = c(0, max(df$speed)),
+                                          step=1, round=0)))
+      }
       elements
       })
-    
   })
