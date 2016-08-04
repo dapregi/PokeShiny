@@ -8,22 +8,17 @@ shinyServer(
   function(input, output){
     
     data_pkmn <- eventReactive(input$show_fields, {
-      if (input$show_fields == 0) {
+      if (length(input$field_checkbox) == 0) {
         data.frame()
-      } else if (input$show_fields == 1) {
-        cols <- as.numeric(input$show_fields)
-        df2 <- data.frame(df[, cols])
-        names(df2) <- names(df)[cols]
+      } else if (length(input$field_checkbox) == 1) {
+        df2 <- data.frame(df[, input$field_checkbox])
+        names(df2) <- input$field_checkbox
         df2
       } else {
         df[, input$field_checkbox] 
       }
     })
-    
-#     data_pkmn <- reactive({
-#       df[, ]
-#       })
-    
+
     output$data_table <- DT::renderDataTable({
       data_pkmn()
     }, options = list(lengthMenu = seq(10, 50, 10), pageLength = 10, 

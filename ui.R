@@ -24,7 +24,7 @@ shinyUI(
           div(class = "option-header", "Fields"),
           helpText("Select the data you want to show"),
           uiOutput("field_checkbox"),
-          actionButton("show_fields", "Show"),
+          actionButton("show_fields", "Show selected fields"),
           div(class = "option-header", "Download"),
           helpText("Export your filtered data table"),
           radioButtons("output_format", "File format:",
