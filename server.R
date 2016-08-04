@@ -6,23 +6,16 @@ df <- read.delim("./pkmn_info2.txt", header = TRUE)
 
 shinyServer(
   function(input, output){
-    
-#     data_pkmn <- eventReactive(input$show_fields, {
-#       if (length(input$field_checkbox) == 0) {
-#         data.frame()
-#       } else if (length(input$field_checkbox) == 1) {
-#         df2 <- data.frame(df[, input$field_checkbox])
-#         names(df2) <- input$field_checkbox
-#         df2
-#       } else {
-#         df[, input$field_checkbox]
-#       }
-#     })
-    
     fields <- eventReactive(input$show_fields, {input$field_checkbox})
     
     data_pkmn <- reactive({
       df2 <- df
+      if (!is.null(input$type) & "type" %in% fields()) {
+        df2 <- df2[rowMeans(sapply(input$type, function(x) grepl(x, df2$type))) > 0, ]
+      }
+      if (!is.null(input$egg_group) & "egg_group" %in% fields()) {
+        df2 <- df2[rowMeans(sapply(input$egg_group, function(x) grepl(x, df2$egg_group))) > 0, ]
+      }
       if (!is.null(input$hp) & "hp" %in% fields()) {
         df2 <- df2[input$hp[1] <= df2$hp &
                      df2$hp <= input$hp[2], ]
@@ -67,7 +60,7 @@ shinyServer(
     output$scatterplot <- renderPlot({
       a <- ggplot(data_pkmn(), aes_string(x = input$x, y = input$y))
       a <- a + geom_point()
-      if (input$type) {
+      if (input$type_yes) {
         a <- a + facet_wrap(~type)
       }
       if(input$regression) {
@@ -113,6 +106,30 @@ shinyServer(
     
     output$filters <- renderUI({
       elements <- list()
+      if ("type" %in% fields()) {
+        types <- unique(unlist(lapply(levels(df$type),
+                                      function(x) strsplit(x, ","))))
+        types <- types[order(types)]
+        elements <- list(elements, 
+                         list(selectInput("type",
+                                          label = "Type:",
+                                          choices = types,
+                                          selected = types,
+                                          multiple=TRUE,
+                                          selectize=TRUE)))
+      }
+      if ("egg_group" %in% fields()) {
+        egg_groups <- unique(unlist(lapply(levels(df$egg_group),
+                                      function(x) strsplit(x, ","))))
+        egg_groups <- egg_groups[order(egg_groups)]
+        elements <- list(elements,
+                         list(selectInput("egg_group",
+                                          label = "Egg group:",
+                                          choices = egg_groups,
+                                          selected = egg_groups,
+                                          multiple=TRUE,
+                                          selectize=TRUE)))
+      }
       if ("hp" %in% fields()) {
         elements <- list(elements,
                          list(sliderInput("hp",
@@ -120,7 +137,7 @@ shinyServer(
                                           min = 0,
                                           max = max(df$hp),
                                           value = c(0, max(df$hp)),
-                                          step=1, round=0)))
+                                          step=10, round=0)))
       }
       if ("attack" %in% fields()) {
         elements <- list(elements,
@@ -129,7 +146,7 @@ shinyServer(
                                           min = 0,
                                           max = max(df$attack),
                                           value = c(0, max(df$attack)),
-                                          step=1, round=0)))
+                                          step=10, round=0)))
       }
       if ("defense" %in% fields()) {
         elements <- list(elements,
@@ -138,7 +155,7 @@ shinyServer(
                                           min = 0,
                                           max = max(df$defense),
                                           value = c(0, max(df$defense)),
-                                          step=1, round=0)))
+                                          step=10, round=0)))
       }
       if ("special.attack" %in% fields()) {
         elements <- list(elements,
@@ -147,7 +164,7 @@ shinyServer(
                                           min = 0,
                                           max = max(df$special.attack),
                                           value = c(0, max(df$special.attack)),
-                                          step=1, round=0)))
+                                          step=10, round=0)))
       }
       if ("special.defense" %in% fields()) {
         elements <- list(elements,
@@ -156,7 +173,7 @@ shinyServer(
                                           min = 0,
                                           max = max(df$special.defense),
                                           value = c(0, max(df$special.defense)),
-                                          step=1, round=0)))
+                                          step=10, round=0)))
       }
       if ("height" %in% fields()) {
         elements <- list(elements,
@@ -165,7 +182,7 @@ shinyServer(
                                           min = 0,
                                           max = max(df$height),
                                           value = c(0, max(df$height)),
-                                          step=1, round=0)))
+                                          step=10, round=0)))
       }
       if ("weight" %in% fields()) {
         elements <- list(elements,
@@ -174,7 +191,7 @@ shinyServer(
                                           min = 0,
                                           max = max(df$weight),
                                           value = c(0, max(df$weight)),
-                                          step=1, round=0)))
+                                          step=100, round=0)))
       }
       if ("speed" %in% fields()) {
         elements <- list(elements,
@@ -183,7 +200,7 @@ shinyServer(
                                           min = 0,
                                           max = max(df$speed),
                                           value = c(0, max(df$speed)),
-                                          step=1, round=0)))
+                                          step=10, round=0)))
       }
       elements
       })

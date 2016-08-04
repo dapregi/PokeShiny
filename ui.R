@@ -39,7 +39,7 @@ shinyUI(
           'input.dataset === "Scatter Plot"',
           selectInput("x", "X-axis:", c("hp", "attack", "defense", "weight", "height"), "weight"),
           selectInput("y", "Y-axis:", c("hp", "attack", "defense", "weight", "height"), "height"),
-          checkboxInput("type", "Plot by Type"),
+          checkboxInput("type_yes", "Plot by Type"),
           checkboxInput("regression", "Line regression")
           ),
         conditionalPanel(
