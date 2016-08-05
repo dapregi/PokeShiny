@@ -22,11 +22,12 @@ shinyUI(
         conditionalPanel(
           'input.dataset === "Exploration"',
           div(class = "option-header", "Fields"),
-          helpText("Select the data you want to show"),
+          helpText("Select the data you want to explore"),
           uiOutput("field_checkbox"),
           actionButton("show_fields", "Show selected fields"),
           hr(),
           div(class = "option-header", "Filters"),
+          helpText("Apply different filters to select your desired data"),
           uiOutput("filters"),
           hr(),
           div(class = "option-header", "Download"),
@@ -55,7 +56,16 @@ shinyUI(
           id='dataset',
           tabPanel("Documentation", includeMarkdown("./documentation.Rmd")),
           tabPanel("Exploration", DT::dataTableOutput("data_table")),
-          tabPanel("Scatter Plot", plotOutput("scatterplot")),
+          tabPanel("Scatter Plot",
+                   fluidRow(
+                     column(width = 7,
+                            plotOutput("scatterplot",
+                                       click = "scatterplot_click")),
+                     
+                     column(width = 5,
+                            imageOutput("sprite", height = "96px"),
+                            hr(),
+                            verbatimTextOutput("scatterplot_click_info")))),
           tabPanel("Histogram", plotOutput("histogram"))
           )
         )

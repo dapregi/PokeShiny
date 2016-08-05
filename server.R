@@ -2,10 +2,10 @@ library(shiny)
 library(DT)
 library(ggplot2)
 
-df <- read.delim("./pkmn_info2.txt", header = TRUE)
-
 shinyServer(
   function(input, output){
+    df <- read.delim("./pkmn_info2.txt", header = TRUE)
+
     fields <- eventReactive(input$show_fields, {input$field_checkbox})
     
     data_pkmn <- reactive({
@@ -68,10 +68,32 @@ shinyServer(
       }
       a
     })
+
+    output$scatterplot_click_info <- renderPrint({
+      if (is.null(input$scatterplot_click)) {
+        return("")
+      } else {
+        t(nearPoints(df, input$scatterplot_click, threshold = 10, maxpoints = 1))
+      }
+    })
+
+    output$sprite <- renderImage({
+      np <- nearPoints(df, input$scatterplot_click, threshold = 10, maxpoints = 1)
+      id <- np$id
+      if (is.null(id)) {
+        return(NULL)
+      } else {
+        return(list(
+          src = paste0("./resources/sprites/", id,".png"),
+          contentType = "image/png",
+          alt = id
+        ))
+      }
+    }, deleteFile = FALSE)
     
     output$histogram <- renderPlot({
       b <- ggplot(data_pkmn(), aes_string(x = input$feature))
-      if(input$aes == "Colour by Type") { 
+      if(input$aes == "Colour by Type") {
         b <- b + aes(fill = type)
         b1 <- b + geom_histogram(binwidth = as.numeric(input$breaks))
       } else if (input$aes == "Colour by Egg Group"){
@@ -98,10 +120,11 @@ shinyServer(
     )
     
     output$field_checkbox <- renderUI({
+      fields <- names(df)
       checkboxGroupInput("field_checkbox",
                          label = NULL,
-                         choices = names(df),
-                         selected = names(df))
+                         choices = fields,
+                         selected = fields)
     })
     
     output$filters <- renderUI({
