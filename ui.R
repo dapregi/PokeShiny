@@ -60,12 +60,24 @@ shinyUI(
                    fluidRow(
                      column(width = 7,
                             plotOutput("scatterplot",
-                                       click = "scatterplot_click")),
-                     
+                                       hover =  hoverOpts(
+                                         id = "scatterplot_hover",
+                                         delay = 300,
+                                         delayType = "throttle"))),
                      column(width = 5,
-                            imageOutput("sprite", height = "96px"),
+                            fluidRow(column(width = 4,
+                                            imageOutput("sprite", height = "96px")),
+                                     column(width = 8,
+                                            uiOutput("info_name"))),
                             hr(),
-                            verbatimTextOutput("scatterplot_click_info")))),
+                            fluidRow(column(width = 6,
+                                            h4("Variable", align = "center"),
+                                            verbatimTextOutput("info_variables")),
+                                     column(width = 6,
+                                            h4("Data", align = "center"),
+                                            verbatimTextOutput("info_data"))))
+                     )
+                   ),
           tabPanel("Histogram", plotOutput("histogram"))
           )
         )

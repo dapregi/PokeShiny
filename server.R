@@ -69,16 +69,40 @@ shinyServer(
       a
     })
 
-    output$scatterplot_click_info <- renderPrint({
-      if (is.null(input$scatterplot_click)) {
+    output$scatterplot_hover_info <- renderPrint({
+      if (is.null(input$scatterplot_hover)) {
         return("")
       } else {
-        t(nearPoints(df, input$scatterplot_click, threshold = 10, maxpoints = 1))
+        t(nearPoints(df, input$scatterplot_hover, threshold = 10, maxpoints = 1))
+      }
+    })
+    
+    output$info_name <- renderUI({
+      np <- nearPoints(df, input$scatterplot_hover, threshold = 10, maxpoints = 1)
+      warning(np$id)
+      if (length(np$id) == 0) {
+        return("")
+      } else {
+        id <- np$id
+        name <- np$name
+        HTML(paste0("<h3>#", id, " ", name, "</h3>"))
+      }
+    })
+    
+    output$info_variables <- renderText({
+        do.call(paste, c(as.list(names(df)), sep = "\n"))
+    })
+    
+    output$info_data <- renderText({
+      if (is.null(input$scatterplot_hover)) {
+        return("")
+      } else {
+        do.call(paste, c(nearPoints(df, input$scatterplot_hover, threshold = 10, maxpoints = 1), sep = "\n")) 
       }
     })
 
     output$sprite <- renderImage({
-      np <- nearPoints(df, input$scatterplot_click, threshold = 10, maxpoints = 1)
+      np <- nearPoints(df, input$scatterplot_hover, threshold = 10, maxpoints = 1)
       id <- np$id
       if (is.null(id)) {
         return(NULL)
