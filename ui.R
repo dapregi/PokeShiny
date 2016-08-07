@@ -20,6 +20,10 @@ shinyUI(
     sidebarLayout(
       sidebarPanel(
         conditionalPanel(
+          'input.dataset === "Documentation"',
+          img(src="poke-ball.png", height = 50, width = 50)
+          ),
+        conditionalPanel(
           'input.dataset === "Exploration"',
           div(class = "option-header", "Fields"),
           helpText("Select the data you want to explore"),
@@ -38,10 +42,7 @@ shinyUI(
           ),
         conditionalPanel(
           'input.dataset === "Scatter Plot"',
-          selectInput("x", "X-axis:", c("hp", "attack", "defense", "weight", "height"), "weight"),
-          selectInput("y", "Y-axis:", c("hp", "attack", "defense", "weight", "height"), "height"),
-          checkboxInput("type_yes", "Plot by Type"),
-          checkboxInput("regression", "Line regression")
+          uiOutput("scatterplot_opts")
           ),
         conditionalPanel(
           'input.dataset === "Histogram"',

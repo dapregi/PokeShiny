@@ -7,7 +7,7 @@ shinyServer(
     df <- read.delim("./pkmn_info2.txt", header = TRUE)
 
     fields <- eventReactive(input$show_fields, {input$field_checkbox})
-    
+
     data_pkmn <- reactive({
       df2 <- df
       if (!is.null(input$type) & "type" %in% fields()) {
@@ -48,25 +48,44 @@ shinyServer(
         df2 <- df2[input$speed[1] <= df2$speed &
                      df2$speed <= input$speed[2], ]
       }
-      df2[, fields()]
+      if (length(fields()) == 1) {
+        df3 <- data.frame(df2[, fields()])
+        names(df3) <- fields()
+        df3
+      } else {
+        df2[, fields()]
+      }
     })
     
     output$data_table <- DT::renderDataTable({
-      data_pkmn()
+        data_pkmn()
     }, rownames = FALSE,
     options = list(lengthMenu = seq(10, 50, 10), pageLength = 20, 
                    orderClasses = TRUE))
     
+    output$scatterplot_opts <- renderUI({
+      elements <- list()
+      elements <- list(elements,
+                       list(selectInput("scatterplot_x", "X-axis:", c(Choose="", names(data_pkmn())))))
+      elements <- list(elements,
+                       list(selectInput("scatterplot_y", "Y-axis:", c(Choose="", names(data_pkmn())))))
+      elements <- list(elements,
+                       checkboxInput("scatterplot_regression", "Line regression"))
+      elements
+    })
+    
     output$scatterplot <- renderPlot({
-      a <- ggplot(data_pkmn(), aes_string(x = input$x, y = input$y))
-      a <- a + geom_point()
-      if (input$type_yes) {
-        a <- a + facet_wrap(~type)
+      if (is.null(data_pkmn()) | is.null(input$scatterplot_x) | is.null(input$scatterplot_y)) {
+        return(NULL)
       }
-      if(input$regression) {
-        a <- a + geom_smooth(method = 'lm', se = TRUE)
+      if (input$scatterplot_x != "" & input$scatterplot_y != "") {
+        a <- ggplot(data_pkmn(), aes_string(x = input$scatterplot_x, y = input$scatterplot_y))
+        a <- a + geom_point()
+        if(input$scatterplot_regression) {
+          a <- a + geom_smooth(method = 'lm', se = TRUE)
+        }
+        a
       }
-      a
     })
 
     output$scatterplot_hover_info <- renderPrint({
@@ -79,13 +98,10 @@ shinyServer(
     
     output$info_name <- renderUI({
       np <- nearPoints(df, input$scatterplot_hover, threshold = 10, maxpoints = 1)
-      warning(np$id)
       if (length(np$id) == 0) {
         return("")
       } else {
-        id <- np$id
-        name <- np$name
-        HTML(paste0("<h3>#", id, " ", name, "</h3>"))
+        HTML(paste0("<h3>#", np$id, " ", np$name, "</h3>"))
       }
     })
     
@@ -108,7 +124,7 @@ shinyServer(
         return(NULL)
       } else {
         return(list(
-          src = paste0("./resources/sprites/", id,".png"),
+          src = paste0("./www/", id,".png"),
           contentType = "image/png",
           alt = id
         ))
