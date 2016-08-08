@@ -19,10 +19,19 @@ shinyServer(
     data_pkmn <- reactive({
       df2 <- df
       if (!is.null(input$type) & "type" %in% fields()) {
-        df2 <- df2[rowMeans(sapply(input$type, function(x) grepl(x, df2$type))) > 0, ]
+        if (input$type_andor == "or") {
+          df2 <- df2[rowMeans(sapply(input$type, function(x) grepl(x, df2$type))) > 0, ]
+        } else if (input$type_andor == "and") {
+          df2 <- df2[rowMeans(sapply(input$type, function(x) grepl(x, df2$type))) == 1, ]
+        }
       }
       if (!is.null(input$egg_group) & "egg_group" %in% fields()) {
-        df2 <- df2[rowMeans(sapply(input$egg_group, function(x) grepl(x, df2$egg_group))) > 0, ]
+        if (input$egg_group_andor == "or") {
+          df2 <- df2[rowMeans(sapply(input$egg_group, function(x) grepl(x, df2$egg_group))) > 0, ]
+        } else if (input$egg_group_andor == "and") {
+          df2 <- df2[rowMeans(sapply(input$egg_group, function(x) grepl(x, df2$egg_group))) == 1, ]
+        }
+        
       }
       if (!is.null(input$hp) & "hp" %in% fields()) {
         df2 <- df2[input$hp[1] <= df2$hp &
@@ -200,9 +209,13 @@ shinyServer(
                          list(selectInput("type",
                                           label = "Type:",
                                           choices = types,
-                                          selected = types,
                                           multiple=TRUE,
-                                          selectize=TRUE)))
+                                          selectize=TRUE),
+                              radioButtons("type_andor",
+                                           label = NULL,
+                                           choices = c("Search for ANY tag" = "or",
+                                                       "Search for ALL tags" = "and"),
+                                           selected = c("or"))))
       }
       if ("egg_group" %in% fields()) {
         egg_groups <- unique(unlist(lapply(levels(df$egg_group),
@@ -212,9 +225,13 @@ shinyServer(
                          list(selectInput("egg_group",
                                           label = "Egg group:",
                                           choices = egg_groups,
-                                          selected = egg_groups,
                                           multiple=TRUE,
-                                          selectize=TRUE)))
+                                          selectize=TRUE),
+                              radioButtons("egg_group_andor",
+                                           label = NULL,
+                                           choices = c("Search for ANY tag" = "or",
+                                                       "Search for ALL tags" = "and"),
+                                           selected = c("or"))))
       }
       if ("hp" %in% fields()) {
         elements <- list(elements,
