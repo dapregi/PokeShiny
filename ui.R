@@ -46,9 +46,12 @@ shinyUI(
           ),
         conditionalPanel(
           'input.dataset === "Histogram"',
-          selectInput("feature", "Feature:", c("hp", "attack", "defense", "weight", "height"), "hp"),
+          selectInput("feature", "Feature:",
+                      c("hp", "attack", "defense", "weight", "height"), "hp"),
           selectInput("breaks", "Bin width:", c(5, 10, 20, 35, 50), 10),
-          selectInput("aes", "Misc:", c("None", "Density line", "Colour by Type", "Colour by Egg Group"), "None")
+          selectInput("aes", "Misc:",
+                      c("None", "Density line", "Colour by Type",
+                        "Colour by Egg Group"), "None")
           )
         ),
       
@@ -63,17 +66,19 @@ shinyUI(
                             plotOutput("scatterplot",
                                        hover =  hoverOpts(
                                          id = "scatterplot_hover",
-                                         delay = 300,
+                                         delay = 200,
                                          delayType = "throttle"))),
                      column(width = 5,
                             fluidRow(column(width = 4,
-                                            imageOutput("sprite", height = "96px")),
+                                            imageOutput("sprite",
+                                                        height = "96px")),
                                      column(width = 8,
                                             uiOutput("info_name"))),
                             hr(),
                             fluidRow(column(width = 6,
                                             h4("Variable", align = "center"),
-                                            verbatimTextOutput("info_variables")),
+                                            verbatimTextOutput("info_variables")
+                                            ),
                                      column(width = 6,
                                             h4("Data", align = "center"),
                                             verbatimTextOutput("info_data"))))

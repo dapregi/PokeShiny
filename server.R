@@ -20,16 +20,20 @@ shinyServer(
       df2 <- df
       if (!is.null(input$type) & "type" %in% fields()) {
         if (input$type_andor == "or") {
-          df2 <- df2[rowMeans(sapply(input$type, function(x) grepl(x, df2$type))) > 0, ]
+          df2 <- df2[rowMeans(sapply(
+            input$type, function(x) grepl(x, df2$type))) > 0, ]
         } else if (input$type_andor == "and") {
-          df2 <- df2[rowMeans(sapply(input$type, function(x) grepl(x, df2$type))) == 1, ]
+          df2 <- df2[rowMeans(sapply(
+            input$type, function(x) grepl(x, df2$type))) == 1, ]
         }
       }
       if (!is.null(input$egg_group) & "egg_group" %in% fields()) {
         if (input$egg_group_andor == "or") {
-          df2 <- df2[rowMeans(sapply(input$egg_group, function(x) grepl(x, df2$egg_group))) > 0, ]
+          df2 <- df2[rowMeans(sapply(
+            input$egg_group, function(x) grepl(x, df2$egg_group))) > 0, ]
         } else if (input$egg_group_andor == "and") {
-          df2 <- df2[rowMeans(sapply(input$egg_group, function(x) grepl(x, df2$egg_group))) == 1, ]
+          df2 <- df2[rowMeans(sapply(
+            input$egg_group, function(x) grepl(x, df2$egg_group))) == 1, ]
         }
         
       }
@@ -81,22 +85,29 @@ shinyServer(
                    orderClasses = TRUE))
     
     output$scatterplot_opts <- renderUI({
+      data <- data_pkmn()
+      options <- names(data[, sapply(data, is.numeric)])
       elements <- list()
       elements <- list(elements,
-                       list(selectInput("scatterplot_x", "X-axis:", c(Choose="", names(data_pkmn())))))
+                       list(selectInput("scatterplot_x", "X-axis:",
+                                        c(Choose="", options))))
       elements <- list(elements,
-                       list(selectInput("scatterplot_y", "Y-axis:", c(Choose="", names(data_pkmn())))))
+                       list(selectInput("scatterplot_y", "Y-axis:",
+                                        c(Choose="", options))))
       elements <- list(elements,
-                       checkboxInput("scatterplot_regression", "Line regression"))
+                       checkboxInput("scatterplot_regression",
+                                     "Line regression"))
       elements
     })
     
     output$scatterplot <- renderPlot({
-      if (is.null(data_pkmn()) | is.null(input$scatterplot_x) | is.null(input$scatterplot_y)) {
+      if (is.null(data_pkmn()) | is.null(input$scatterplot_x) |
+          is.null(input$scatterplot_y)) {
         return(NULL)
       }
       if (input$scatterplot_x != "" & input$scatterplot_y != "") {
-        a <- ggplot(data_pkmn(), aes_string(x = input$scatterplot_x, y = input$scatterplot_y))
+        a <- ggplot(data_pkmn(), aes_string(x = input$scatterplot_x,
+                                            y = input$scatterplot_y))
         a <- a + geom_point()
         if(input$scatterplot_regression) {
           a <- a + geom_smooth(method = 'lm', se = TRUE)
@@ -111,10 +122,10 @@ shinyServer(
                        axis.title.x = element_blank(),
                        axis.title.y = element_blank(),
                        legend.position = "none",
-                       panel.background = element_blank(),
-                       panel.border = element_blank(),
-                       panel.grid.major = element_blank(),
-                       panel.grid.minor = element_blank(),
+                       # panel.background = element_blank(),
+                       # panel.border = element_blank(),
+                       # panel.grid.major = element_blank(),
+                       # panel.grid.minor = element_blank(),
                        plot.background = element_blank())
         a
       }
@@ -124,12 +135,14 @@ shinyServer(
       if (is.null(input$scatterplot_hover)) {
         return("")
       } else {
-        t(nearPoints(df, input$scatterplot_hover, threshold = 10, maxpoints = 1))
+        t(nearPoints(df, input$scatterplot_hover, threshold = 10,
+                     maxpoints = 1))
       }
     })
     
     output$info_name <- renderUI({
-      np <- nearPoints(df, input$scatterplot_hover, threshold = 10, maxpoints = 1)
+      np <- nearPoints(df, input$scatterplot_hover, threshold = 10,
+                       maxpoints = 1)
       if (length(np$id) == 0) {
         return("")
       } else {
@@ -145,12 +158,14 @@ shinyServer(
       if (is.null(input$scatterplot_hover)) {
         return("")
       } else {
-        do.call(paste, c(nearPoints(df, input$scatterplot_hover, threshold = 10, maxpoints = 1), sep = "\n")) 
+        do.call(paste, c(nearPoints(df, input$scatterplot_hover, threshold = 10,
+                                    maxpoints = 1), sep = "\n")) 
       }
     })
 
     output$sprite <- renderImage({
-      np <- nearPoints(df, input$scatterplot_hover, threshold = 10, maxpoints = 1)
+      np <- nearPoints(df, input$scatterplot_hover, threshold = 10,
+                       maxpoints = 1)
       id <- np$id
       if (is.null(id)) {
         return(NULL)
@@ -172,7 +187,8 @@ shinyServer(
         b <- b + aes(fill = egg_group)
         b1 <- b + geom_histogram(binwidth = as.numeric(input$breaks))
       } else if (input$aes == "Density line") {
-        b <- b + geom_histogram(aes(y = ..density..), binwidth = as.numeric(input$breaks))
+        b <- b + geom_histogram(aes(y = ..density..),
+                                binwidth = as.numeric(input$breaks))
         b1 <- b + geom_density()
       } else {
         b1 <- b + geom_histogram(binwidth = as.numeric(input$breaks))
