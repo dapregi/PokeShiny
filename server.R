@@ -6,7 +6,17 @@ shinyServer(
   function(input, output){
     df <- read.delim("./pkmn_info2.txt", header = TRUE)
 
-    fields <- eventReactive(input$show_fields, {input$field_checkbox})
+    # fields <- eventReactive(input$show_fields, {input$field_checkbox})
+    
+    selected_fields <- eventReactive(input$show_fields, {input$field_checkbox})
+    
+    fields <- reactive({
+      if (input$show_fields == 0) {
+        names(df)
+      } else {
+        selected_fields()
+      }
+    })
 
     data_pkmn <- reactive({
       df2 <- df
