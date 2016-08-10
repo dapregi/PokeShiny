@@ -18,6 +18,15 @@ shinyServer(
 
     data_pkmn <- reactive({
       df2 <- df
+      if (!is.null(input$generation) & "generation" %in% fields()) {
+        if (input$generation_andor == "or") {
+          df2 <- df2[rowMeans(sapply(
+            input$generation, function(x) grepl(x, df2$generation))) > 0, ]
+        } else if (input$generation_andor == "and") {
+          df2 <- df2[rowMeans(sapply(
+            input$generation, function(x) grepl(x, df2$generation))) == 1, ]
+        }
+      }
       if (!is.null(input$type) & "type" %in% fields()) {
         if (input$type_andor == "or") {
           df2 <- df2[rowMeans(sapply(
@@ -35,7 +44,6 @@ shinyServer(
           df2 <- df2[rowMeans(sapply(
             input$egg_group, function(x) grepl(x, df2$egg_group))) == 1, ]
         }
-        
       }
       if (!is.null(input$hp) & "hp" %in% fields()) {
         df2 <- df2[input$hp[1] <= df2$hp &
@@ -130,41 +138,9 @@ shinyServer(
         a
       }
     })
-
-    output$scatterplot_hover_info <- renderPrint({
-      if (is.null(input$scatterplot_hover)) {
-        return("")
-      } else {
-        t(nearPoints(df, input$scatterplot_hover, threshold = 10,
-                     maxpoints = 1))
-      }
-    })
     
-    output$info_name <- renderUI({
-      np <- nearPoints(df, input$scatterplot_hover, threshold = 10,
-                       maxpoints = 1)
-      if (length(np$id) == 0) {
-        return("")
-      } else {
-        HTML(paste0("<h3>#", np$id, " ", np$name, "</h3>"))
-      }
-    })
-    
-    output$info_variables <- renderText({
-        do.call(paste, c(as.list(names(df)), sep = "\n"))
-    })
-    
-    output$info_data <- renderText({
-      if (is.null(input$scatterplot_hover)) {
-        return("")
-      } else {
-        do.call(paste, c(nearPoints(df, input$scatterplot_hover, threshold = 10,
-                                    maxpoints = 1), sep = "\n")) 
-      }
-    })
-
     output$sprite <- renderImage({
-      np <- nearPoints(df, input$scatterplot_hover, threshold = 10,
+      np <- nearPoints(data_pkmn(), input$scatterplot_hover, threshold = 10,
                        maxpoints = 1)
       id <- np$id
       if (is.null(id)) {
@@ -177,7 +153,32 @@ shinyServer(
         ))
       }
     }, deleteFile = FALSE)
+
+    output$info_name <- renderUI({
+      np <- nearPoints(data_pkmn(), input$scatterplot_hover, threshold = 10,
+                       maxpoints = 1)
+      if (length(np$id) == 0) {
+        return("")
+      } else {
+        HTML(paste0("<h3>#", np$id, " ", np$name, "</h3>"))
+      }
+    })
     
+    output$info_variables <- renderText({
+      do.call(paste, c(as.list(names(df)), sep = "\n"))
+    })
+    
+    output$info_data <- renderText({
+      if (is.null(input$scatterplot_hover)) {
+        return("")
+      } else {
+        data <- df[as.integer(nearPoints(data_pkmn(), input$scatterplot_hover,
+                                         threshold = 10, maxpoints = 1)[1]), ]
+        do.call(paste, c(nearPoints(data, input$scatterplot_hover,
+                                    threshold = 10, maxpoints = 1), sep = "\n")) 
+      }
+    })
+
     output$histogram <- renderPlot({
       b <- ggplot(data_pkmn(), aes_string(x = input$feature))
       if(input$aes == "Colour by Type") {
@@ -217,6 +218,22 @@ shinyServer(
     
     output$filters <- renderUI({
       elements <- list()
+      if ("generation" %in% fields()) {
+        generations <- unique(unlist(lapply(levels(df$generation),
+                                      function(x) strsplit(x, ","))))
+        generations <- generations[order(generations)]
+        elements <- list(elements, 
+                         list(selectInput("generation",
+                                          label = "Generation:",
+                                          choices = generations,
+                                          multiple=TRUE,
+                                          selectize=TRUE),
+                              radioButtons("generation_andor",
+                                           label = NULL,
+                                           choices = c("Search for ANY tag" = "or",
+                                                       "Search for ALL tags" = "and"),
+                                           selected = c("or"))))
+      }
       if ("type" %in% fields()) {
         types <- unique(unlist(lapply(levels(df$type),
                                       function(x) strsplit(x, ","))))

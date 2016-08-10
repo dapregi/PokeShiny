@@ -1,152 +1,152 @@
-id	name	type	egg_group	hp	attack	defense	special-attack	special-defense	height	weight	speed
-1	bulbasaur	grass,poison	plant,monster	45	49	49	65	65	7	69	45
-2	ivysaur	grass,poison	plant,monster	60	62	63	80	80	10	130	60
-3	venusaur	grass,poison	plant,monster	80	82	83	100	100	20	1000	80
-4	charmander	fire	dragon,monster	39	52	43	60	50	6	85	65
-5	charmeleon	fire	dragon,monster	58	64	58	80	65	11	190	80
-6	charizard	fire,flying	dragon,monster	78	84	78	109	85	17	905	100
-7	squirtle	water	water1,monster	44	48	65	50	64	5	90	43
-8	wartortle	water	water1,monster	59	63	80	65	80	10	225	58
-9	blastoise	water	water1,monster	79	83	100	85	105	16	855	78
-10	caterpie	bug	bug	45	30	35	20	20	3	29	45
-11	metapod	bug	bug	50	20	55	25	25	7	99	30
-12	butterfree	bug,flying	bug	60	45	50	90	80	11	320	70
-13	weedle	bug,poison	bug	40	35	30	20	20	3	32	50
-14	kakuna	bug,poison	bug	45	25	50	25	25	6	100	35
-15	beedrill	bug,poison	bug	65	90	40	45	80	10	295	75
-16	pidgey	normal,flying	flying	40	45	40	35	35	3	18	56
-17	pidgeotto	normal,flying	flying	63	60	55	50	50	11	300	71
-18	pidgeot	normal,flying	flying	83	80	75	70	70	15	395	101
-19	rattata	normal	ground	30	56	35	25	35	3	35	72
-20	raticate	normal	ground	55	81	60	50	70	7	185	97
-21	spearow	normal,flying	flying	40	60	30	31	31	3	20	70
-22	fearow	normal,flying	flying	65	90	65	61	61	12	380	100
-23	ekans	poison	dragon,ground	35	60	44	40	54	20	69	55
-24	arbok	poison	dragon,ground	60	85	69	65	79	35	650	80
-25	pikachu	electric	fairy,ground	35	55	40	50	50	4	60	90
-26	raichu	electric	fairy,ground	60	90	55	90	80	8	300	110
-27	sandshrew	ground	ground	50	75	85	20	30	6	120	40
-28	sandslash	ground	ground	75	100	110	45	55	10	295	65
-29	nidoran-f	poison	ground,monster	55	47	52	40	40	4	70	41
-30	nidorina	poison	no-eggs	70	62	67	55	55	8	200	56
-31	nidoqueen	poison,ground	no-eggs	90	92	87	75	85	13	600	76
-32	nidoran-m	poison	ground,monster	46	57	40	40	40	5	90	50
-33	nidorino	poison	ground,monster	61	72	57	55	55	9	195	65
-34	nidoking	poison,ground	ground,monster	81	102	77	85	75	14	620	85
-35	clefairy	fairy	fairy	70	45	48	60	65	6	75	35
-36	clefable	fairy	fairy	95	70	73	95	90	13	400	60
-37	vulpix	fire	ground	38	41	40	50	65	6	99	65
-38	ninetales	fire	ground	73	76	75	81	100	11	199	100
-39	jigglypuff	normal,fairy	fairy	115	45	20	45	25	5	55	20
-40	wigglytuff	normal,fairy	fairy	140	70	45	85	50	10	120	45
-41	zubat	poison,flying	flying	40	45	35	30	40	8	75	55
-42	golbat	poison,flying	flying	75	80	70	65	75	16	550	90
-43	oddish	grass,poison	plant	45	50	55	75	65	5	54	30
-44	gloom	grass,poison	plant	60	65	70	85	75	8	86	40
-45	vileplume	grass,poison	plant	75	80	85	110	90	12	186	50
-46	paras	bug,grass	plant,bug	35	70	55	45	55	3	54	25
-47	parasect	bug,grass	plant,bug	60	95	80	60	80	10	295	30
-48	venonat	bug,poison	bug	60	55	50	40	55	10	300	45
-49	venomoth	bug,poison	bug	70	65	60	90	75	15	125	90
-50	diglett	ground	ground	10	55	25	35	45	2	8	95
-51	dugtrio	ground	ground	35	80	50	50	70	7	333	120
-52	meowth	normal	ground	40	45	35	40	40	4	42	90
-53	persian	normal	ground	65	70	60	65	65	10	320	115
-54	psyduck	water	ground,water1	50	52	48	65	50	8	196	55
-55	golduck	water	ground,water1	80	82	78	95	80	17	766	85
-56	mankey	fighting	ground	40	80	35	35	45	5	280	70
-57	primeape	fighting	ground	65	105	60	60	70	10	320	95
-58	growlithe	fire	ground	55	70	45	70	50	7	190	60
-59	arcanine	fire	ground	90	110	80	100	80	19	1550	95
-60	poliwag	water	water1	40	50	40	40	40	6	124	90
-61	poliwhirl	water	water1	65	65	65	50	50	10	200	90
-62	poliwrath	water,fighting	water1	90	95	95	70	90	13	540	70
-63	abra	psychic	humanshape	25	20	15	105	55	9	195	90
-64	kadabra	psychic	humanshape	40	35	30	120	70	13	565	105
-65	alakazam	psychic	humanshape	55	50	45	135	95	15	480	120
-66	machop	fighting	humanshape	70	80	50	35	35	8	195	35
-67	machoke	fighting	humanshape	80	100	70	50	60	15	705	45
-68	machamp	fighting	humanshape	90	130	80	65	85	16	1300	55
-69	bellsprout	grass,poison	plant	50	75	35	70	30	7	40	40
-70	weepinbell	grass,poison	plant	65	90	50	85	45	10	64	55
-71	victreebel	grass,poison	plant	80	105	65	100	70	17	155	70
-72	tentacool	water,poison	water3	40	40	35	50	100	9	455	70
-73	tentacruel	water,poison	water3	80	70	65	80	120	16	550	100
-74	geodude	rock,ground	mineral	40	80	100	30	30	4	200	20
-75	graveler	rock,ground	mineral	55	95	115	45	45	10	1050	35
-76	golem	rock,ground	mineral	80	120	130	55	65	14	3000	45
-77	ponyta	fire	ground	50	85	55	65	65	10	300	90
-78	rapidash	fire	ground	65	100	70	80	80	17	950	105
-79	slowpoke	water,psychic	water1,monster	90	65	65	40	40	12	360	15
-80	slowbro	water,psychic	water1,monster	95	75	110	100	80	16	785	30
-81	magnemite	electric,steel	mineral	25	35	70	95	55	3	60	45
-82	magneton	electric,steel	mineral	50	60	95	120	70	10	600	70
-83	farfetchd	normal,flying	ground,flying	52	65	55	58	62	8	150	60
-84	doduo	normal,flying	flying	35	85	45	35	35	14	392	75
-85	dodrio	normal,flying	flying	60	110	70	60	60	18	852	100
-86	seel	water	ground,water1	65	45	55	45	70	11	900	45
-87	dewgong	water,ice	ground,water1	90	70	80	70	95	17	1200	70
-88	grimer	poison	indeterminate	80	80	50	40	50	9	300	25
-89	muk	poison	indeterminate	105	105	75	65	100	12	300	50
-90	shellder	water	water3	30	65	100	45	25	3	40	40
-91	cloyster	water,ice	water3	50	95	180	85	45	15	1325	70
-92	gastly	ghost,poison	indeterminate	30	35	30	100	35	13	1	80
-93	haunter	ghost,poison	indeterminate	45	50	45	115	55	16	1	95
-94	gengar	ghost,poison	indeterminate	60	65	60	130	75	15	405	110
-95	onix	rock,ground	mineral	35	45	160	30	45	88	2100	70
-96	drowzee	psychic	humanshape	60	48	45	43	90	10	324	42
-97	hypno	psychic	humanshape	85	73	70	73	115	16	756	67
-98	krabby	water	water3	30	105	90	25	25	4	65	50
-99	kingler	water	water3	55	130	115	50	50	13	600	75
-100	voltorb	electric	mineral	40	30	50	55	55	5	104	100
-101	electrode	electric	mineral	60	50	70	80	80	12	666	140
-102	exeggcute	grass,psychic	plant	60	40	80	60	45	4	25	40
-103	exeggutor	grass,psychic	plant	95	95	85	125	65	20	1200	55
-104	cubone	ground	monster	50	50	95	40	50	4	65	35
-105	marowak	ground	monster	60	80	110	50	80	10	450	45
-106	hitmonlee	fighting	humanshape	50	120	53	35	110	15	498	87
-107	hitmonchan	fighting	humanshape	50	105	79	35	110	14	502	76
-108	lickitung	normal	monster	90	55	75	60	75	12	655	30
-109	koffing	poison	indeterminate	40	65	95	60	45	6	10	35
-110	weezing	poison	indeterminate	65	90	120	85	70	12	95	60
-111	rhyhorn	ground,rock	ground,monster	80	85	95	30	30	10	1150	25
-112	rhydon	ground,rock	ground,monster	105	130	120	45	45	19	1200	40
-113	chansey	normal	fairy	250	5	5	35	105	11	346	50
-114	tangela	grass	plant	65	55	115	100	40	10	350	60
-115	kangaskhan	normal	monster	105	95	80	40	80	22	800	90
-116	horsea	water	dragon,water1	30	40	70	70	25	4	80	60
-117	seadra	water	dragon,water1	55	65	95	95	45	12	250	85
-118	goldeen	water	water2	45	67	60	35	50	6	150	63
-119	seaking	water	water2	80	92	65	65	80	13	390	68
-120	staryu	water	water3	30	45	55	70	55	8	345	85
-121	starmie	water,psychic	water3	60	75	85	100	85	11	800	115
-122	mr-mime	psychic,fairy	humanshape	40	45	65	100	120	13	545	90
-123	scyther	bug,flying	bug	70	110	80	55	80	15	560	105
-124	jynx	ice,psychic	humanshape	65	50	35	115	95	14	406	95
-125	electabuzz	electric	humanshape	65	83	57	95	85	11	300	105
-126	magmar	fire	humanshape	65	95	57	100	85	13	445	93
-127	pinsir	bug	bug	65	125	100	55	70	15	550	85
-128	tauros	normal	ground	75	100	95	40	70	14	884	110
-129	magikarp	water	dragon,water2	20	10	55	15	20	9	100	80
-130	gyarados	water,flying	dragon,water2	95	125	79	60	100	65	2350	81
-131	lapras	water,ice	water1,monster	130	85	80	85	95	25	2200	60
-132	ditto	normal	ditto	48	48	48	48	48	3	40	48
-133	eevee	normal	ground	55	55	50	45	65	3	65	55
-134	vaporeon	water	ground	130	65	60	110	95	10	290	65
-135	jolteon	electric	ground	65	65	60	110	95	8	245	130
-136	flareon	fire	ground	65	130	60	95	110	9	250	65
-137	porygon	normal	mineral	65	60	70	85	75	8	365	40
-138	omanyte	rock,water	water3,water1	35	40	100	90	55	4	75	35
-139	omastar	rock,water	water3,water1	70	60	125	115	70	10	350	55
-140	kabuto	rock,water	water3,water1	30	80	90	55	45	5	115	55
-141	kabutops	rock,water	water3,water1	60	115	105	65	70	13	405	80
-142	aerodactyl	rock,flying	flying	80	105	65	60	75	18	590	130
-143	snorlax	normal	monster	160	110	65	65	110	21	4600	30
-144	articuno	ice,flying	no-eggs	90	85	100	95	125	17	554	85
-145	zapdos	electric,flying	no-eggs	90	90	85	125	90	16	526	100
-146	moltres	fire,flying	no-eggs	90	100	90	125	85	20	600	90
-147	dratini	dragon	dragon,water1	41	64	45	50	50	18	33	50
-148	dragonair	dragon	dragon,water1	61	84	65	70	70	40	165	70
-149	dragonite	dragon,flying	dragon,water1	91	134	95	100	100	22	2100	80
-150	mewtwo	psychic	no-eggs	106	110	90	154	90	20	1220	130
-151	mew	psychic	no-eggs	100	100	100	100	100	4	40	100
+id	name	type	egg_group	hp	attack	defense	special-attack	special-defense	height	weight	speed	generation
+1	bulbasaur	grass,poison	plant,monster	45	49	49	65	65	7	69	45	generation-i
+2	ivysaur	grass,poison	plant,monster	60	62	63	80	80	10	130	60	generation-i
+3	venusaur	grass,poison	plant,monster	80	82	83	100	100	20	1000	80	generation-i
+4	charmander	fire	dragon,monster	39	52	43	60	50	6	85	65	generation-i
+5	charmeleon	fire	dragon,monster	58	64	58	80	65	11	190	80	generation-i
+6	charizard	fire,flying	dragon,monster	78	84	78	109	85	17	905	100	generation-i
+7	squirtle	water	water1,monster	44	48	65	50	64	5	90	43	generation-i
+8	wartortle	water	water1,monster	59	63	80	65	80	10	225	58	generation-i
+9	blastoise	water	water1,monster	79	83	100	85	105	16	855	78	generation-i
+10	caterpie	bug	bug	45	30	35	20	20	3	29	45	generation-i
+11	metapod	bug	bug	50	20	55	25	25	7	99	30	generation-i
+12	butterfree	bug,flying	bug	60	45	50	90	80	11	320	70	generation-i
+13	weedle	bug,poison	bug	40	35	30	20	20	3	32	50	generation-i
+14	kakuna	bug,poison	bug	45	25	50	25	25	6	100	35	generation-i
+15	beedrill	bug,poison	bug	65	90	40	45	80	10	295	75	generation-i
+16	pidgey	normal,flying	flying	40	45	40	35	35	3	18	56	generation-i
+17	pidgeotto	normal,flying	flying	63	60	55	50	50	11	300	71	generation-i
+18	pidgeot	normal,flying	flying	83	80	75	70	70	15	395	101	generation-i
+19	rattata	normal	ground	30	56	35	25	35	3	35	72	generation-i
+20	raticate	normal	ground	55	81	60	50	70	7	185	97	generation-i
+21	spearow	normal,flying	flying	40	60	30	31	31	3	20	70	generation-i
+22	fearow	normal,flying	flying	65	90	65	61	61	12	380	100	generation-i
+23	ekans	poison	dragon,ground	35	60	44	40	54	20	69	55	generation-i
+24	arbok	poison	dragon,ground	60	85	69	65	79	35	650	80	generation-i
+25	pikachu	electric	fairy,ground	35	55	40	50	50	4	60	90	generation-i
+26	raichu	electric	fairy,ground	60	90	55	90	80	8	300	110	generation-i
+27	sandshrew	ground	ground	50	75	85	20	30	6	120	40	generation-i
+28	sandslash	ground	ground	75	100	110	45	55	10	295	65	generation-i
+29	nidoran-f	poison	ground,monster	55	47	52	40	40	4	70	41	generation-i
+30	nidorina	poison	no-eggs	70	62	67	55	55	8	200	56	generation-i
+31	nidoqueen	poison,ground	no-eggs	90	92	87	75	85	13	600	76	generation-i
+32	nidoran-m	poison	ground,monster	46	57	40	40	40	5	90	50	generation-i
+33	nidorino	poison	ground,monster	61	72	57	55	55	9	195	65	generation-i
+34	nidoking	poison,ground	ground,monster	81	102	77	85	75	14	620	85	generation-i
+35	clefairy	fairy	fairy	70	45	48	60	65	6	75	35	generation-i
+36	clefable	fairy	fairy	95	70	73	95	90	13	400	60	generation-i
+37	vulpix	fire	ground	38	41	40	50	65	6	99	65	generation-i
+38	ninetales	fire	ground	73	76	75	81	100	11	199	100	generation-i
+39	jigglypuff	normal,fairy	fairy	115	45	20	45	25	5	55	20	generation-i
+40	wigglytuff	normal,fairy	fairy	140	70	45	85	50	10	120	45	generation-i
+41	zubat	poison,flying	flying	40	45	35	30	40	8	75	55	generation-i
+42	golbat	poison,flying	flying	75	80	70	65	75	16	550	90	generation-i
+43	oddish	grass,poison	plant	45	50	55	75	65	5	54	30	generation-i
+44	gloom	grass,poison	plant	60	65	70	85	75	8	86	40	generation-i
+45	vileplume	grass,poison	plant	75	80	85	110	90	12	186	50	generation-i
+46	paras	bug,grass	plant,bug	35	70	55	45	55	3	54	25	generation-i
+47	parasect	bug,grass	plant,bug	60	95	80	60	80	10	295	30	generation-i
+48	venonat	bug,poison	bug	60	55	50	40	55	10	300	45	generation-i
+49	venomoth	bug,poison	bug	70	65	60	90	75	15	125	90	generation-i
+50	diglett	ground	ground	10	55	25	35	45	2	8	95	generation-i
+51	dugtrio	ground	ground	35	80	50	50	70	7	333	120	generation-i
+52	meowth	normal	ground	40	45	35	40	40	4	42	90	generation-i
+53	persian	normal	ground	65	70	60	65	65	10	320	115	generation-i
+54	psyduck	water	ground,water1	50	52	48	65	50	8	196	55	generation-i
+55	golduck	water	ground,water1	80	82	78	95	80	17	766	85	generation-i
+56	mankey	fighting	ground	40	80	35	35	45	5	280	70	generation-i
+57	primeape	fighting	ground	65	105	60	60	70	10	320	95	generation-i
+58	growlithe	fire	ground	55	70	45	70	50	7	190	60	generation-i
+59	arcanine	fire	ground	90	110	80	100	80	19	1550	95	generation-i
+60	poliwag	water	water1	40	50	40	40	40	6	124	90	generation-i
+61	poliwhirl	water	water1	65	65	65	50	50	10	200	90	generation-i
+62	poliwrath	water,fighting	water1	90	95	95	70	90	13	540	70	generation-i
+63	abra	psychic	humanshape	25	20	15	105	55	9	195	90	generation-i
+64	kadabra	psychic	humanshape	40	35	30	120	70	13	565	105	generation-i
+65	alakazam	psychic	humanshape	55	50	45	135	95	15	480	120	generation-i
+66	machop	fighting	humanshape	70	80	50	35	35	8	195	35	generation-i
+67	machoke	fighting	humanshape	80	100	70	50	60	15	705	45	generation-i
+68	machamp	fighting	humanshape	90	130	80	65	85	16	1300	55	generation-i
+69	bellsprout	grass,poison	plant	50	75	35	70	30	7	40	40	generation-i
+70	weepinbell	grass,poison	plant	65	90	50	85	45	10	64	55	generation-i
+71	victreebel	grass,poison	plant	80	105	65	100	70	17	155	70	generation-i
+72	tentacool	water,poison	water3	40	40	35	50	100	9	455	70	generation-i
+73	tentacruel	water,poison	water3	80	70	65	80	120	16	550	100	generation-i
+74	geodude	rock,ground	mineral	40	80	100	30	30	4	200	20	generation-i
+75	graveler	rock,ground	mineral	55	95	115	45	45	10	1050	35	generation-i
+76	golem	rock,ground	mineral	80	120	130	55	65	14	3000	45	generation-i
+77	ponyta	fire	ground	50	85	55	65	65	10	300	90	generation-i
+78	rapidash	fire	ground	65	100	70	80	80	17	950	105	generation-i
+79	slowpoke	water,psychic	water1,monster	90	65	65	40	40	12	360	15	generation-i
+80	slowbro	water,psychic	water1,monster	95	75	110	100	80	16	785	30	generation-i
+81	magnemite	electric,steel	mineral	25	35	70	95	55	3	60	45	generation-i
+82	magneton	electric,steel	mineral	50	60	95	120	70	10	600	70	generation-i
+83	farfetchd	normal,flying	ground,flying	52	65	55	58	62	8	150	60	generation-i
+84	doduo	normal,flying	flying	35	85	45	35	35	14	392	75	generation-i
+85	dodrio	normal,flying	flying	60	110	70	60	60	18	852	100	generation-i
+86	seel	water	ground,water1	65	45	55	45	70	11	900	45	generation-i
+87	dewgong	water,ice	ground,water1	90	70	80	70	95	17	1200	70	generation-i
+88	grimer	poison	indeterminate	80	80	50	40	50	9	300	25	generation-i
+89	muk	poison	indeterminate	105	105	75	65	100	12	300	50	generation-i
+90	shellder	water	water3	30	65	100	45	25	3	40	40	generation-i
+91	cloyster	water,ice	water3	50	95	180	85	45	15	1325	70	generation-i
+92	gastly	ghost,poison	indeterminate	30	35	30	100	35	13	1	80	generation-i
+93	haunter	ghost,poison	indeterminate	45	50	45	115	55	16	1	95	generation-i
+94	gengar	ghost,poison	indeterminate	60	65	60	130	75	15	405	110	generation-i
+95	onix	rock,ground	mineral	35	45	160	30	45	88	2100	70	generation-i
+96	drowzee	psychic	humanshape	60	48	45	43	90	10	324	42	generation-i
+97	hypno	psychic	humanshape	85	73	70	73	115	16	756	67	generation-i
+98	krabby	water	water3	30	105	90	25	25	4	65	50	generation-i
+99	kingler	water	water3	55	130	115	50	50	13	600	75	generation-i
+100	voltorb	electric	mineral	40	30	50	55	55	5	104	100	generation-i
+101	electrode	electric	mineral	60	50	70	80	80	12	666	140	generation-i
+102	exeggcute	grass,psychic	plant	60	40	80	60	45	4	25	40	generation-i
+103	exeggutor	grass,psychic	plant	95	95	85	125	65	20	1200	55	generation-i
+104	cubone	ground	monster	50	50	95	40	50	4	65	35	generation-i
+105	marowak	ground	monster	60	80	110	50	80	10	450	45	generation-i
+106	hitmonlee	fighting	humanshape	50	120	53	35	110	15	498	87	generation-i
+107	hitmonchan	fighting	humanshape	50	105	79	35	110	14	502	76	generation-i
+108	lickitung	normal	monster	90	55	75	60	75	12	655	30	generation-i
+109	koffing	poison	indeterminate	40	65	95	60	45	6	10	35	generation-i
+110	weezing	poison	indeterminate	65	90	120	85	70	12	95	60	generation-i
+111	rhyhorn	ground,rock	ground,monster	80	85	95	30	30	10	1150	25	generation-i
+112	rhydon	ground,rock	ground,monster	105	130	120	45	45	19	1200	40	generation-i
+113	chansey	normal	fairy	250	5	5	35	105	11	346	50	generation-i
+114	tangela	grass	plant	65	55	115	100	40	10	350	60	generation-i
+115	kangaskhan	normal	monster	105	95	80	40	80	22	800	90	generation-i
+116	horsea	water	dragon,water1	30	40	70	70	25	4	80	60	generation-i
+117	seadra	water	dragon,water1	55	65	95	95	45	12	250	85	generation-i
+118	goldeen	water	water2	45	67	60	35	50	6	150	63	generation-i
+119	seaking	water	water2	80	92	65	65	80	13	390	68	generation-i
+120	staryu	water	water3	30	45	55	70	55	8	345	85	generation-i
+121	starmie	water,psychic	water3	60	75	85	100	85	11	800	115	generation-i
+122	mr-mime	psychic,fairy	humanshape	40	45	65	100	120	13	545	90	generation-i
+123	scyther	bug,flying	bug	70	110	80	55	80	15	560	105	generation-i
+124	jynx	ice,psychic	humanshape	65	50	35	115	95	14	406	95	generation-i
+125	electabuzz	electric	humanshape	65	83	57	95	85	11	300	105	generation-i
+126	magmar	fire	humanshape	65	95	57	100	85	13	445	93	generation-i
+127	pinsir	bug	bug	65	125	100	55	70	15	550	85	generation-i
+128	tauros	normal	ground	75	100	95	40	70	14	884	110	generation-i
+129	magikarp	water	dragon,water2	20	10	55	15	20	9	100	80	generation-i
+130	gyarados	water,flying	dragon,water2	95	125	79	60	100	65	2350	81	generation-i
+131	lapras	water,ice	water1,monster	130	85	80	85	95	25	2200	60	generation-i
+132	ditto	normal	ditto	48	48	48	48	48	3	40	48	generation-i
+133	eevee	normal	ground	55	55	50	45	65	3	65	55	generation-i
+134	vaporeon	water	ground	130	65	60	110	95	10	290	65	generation-i
+135	jolteon	electric	ground	65	65	60	110	95	8	245	130	generation-i
+136	flareon	fire	ground	65	130	60	95	110	9	250	65	generation-i
+137	porygon	normal	mineral	65	60	70	85	75	8	365	40	generation-i
+138	omanyte	rock,water	water3,water1	35	40	100	90	55	4	75	35	generation-i
+139	omastar	rock,water	water3,water1	70	60	125	115	70	10	350	55	generation-i
+140	kabuto	rock,water	water3,water1	30	80	90	55	45	5	115	55	generation-i
+141	kabutops	rock,water	water3,water1	60	115	105	65	70	13	405	80	generation-i
+142	aerodactyl	rock,flying	flying	80	105	65	60	75	18	590	130	generation-i
+143	snorlax	normal	monster	160	110	65	65	110	21	4600	30	generation-i
+144	articuno	ice,flying	no-eggs	90	85	100	95	125	17	554	85	generation-i
+145	zapdos	electric,flying	no-eggs	90	90	85	125	90	16	526	100	generation-i
+146	moltres	fire,flying	no-eggs	90	100	90	125	85	20	600	90	generation-i
+147	dratini	dragon	dragon,water1	41	64	45	50	50	18	33	50	generation-i
+148	dragonair	dragon	dragon,water1	61	84	65	70	70	40	165	70	generation-i
+149	dragonite	dragon,flying	dragon,water1	91	134	95	100	100	22	2100	80	generation-i
+150	mewtwo	psychic	no-eggs	106	110	90	154	90	20	1220	130	generation-i
+151	mew	psychic	no-eggs	100	100	100	100	100	4	40	100	generation-i
