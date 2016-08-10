@@ -93,8 +93,7 @@ shinyServer(
                    orderClasses = TRUE))
     
     output$scatterplot_opts <- renderUI({
-      data <- data_pkmn()
-      options <- names(data[, sapply(data, is.numeric)])
+      options <- names(df[, sapply(df, is.numeric)])
       elements <- list()
       elements <- list(elements,
                        list(selectInput("scatterplot_x", "X-axis:",
@@ -108,14 +107,19 @@ shinyServer(
       elements
     })
     
+    data_plot <- reactive({
+      data <- data_pkmn()
+      data_plot <- df[as.vector(rownames(data)), ]
+    })
+    
     output$scatterplot <- renderPlot({
-      if (is.null(data_pkmn()) | is.null(input$scatterplot_x) |
+      if (is.null(data_plot()) | is.null(input$scatterplot_x) |
           is.null(input$scatterplot_y)) {
         return(NULL)
       }
       if (input$scatterplot_x != "" & input$scatterplot_y != "") {
-        a <- ggplot(data_pkmn(), aes_string(x = input$scatterplot_x,
-                                            y = input$scatterplot_y))
+        a <- ggplot(data_plot(), aes_string(x = input$scatterplot_x,
+                                          y = input$scatterplot_y))
         a <- a + geom_point()
         if(input$scatterplot_regression) {
           a <- a + geom_smooth(method = 'lm', se = TRUE)
@@ -140,7 +144,7 @@ shinyServer(
     })
     
     output$sprite <- renderImage({
-      np <- nearPoints(data_pkmn(), input$scatterplot_hover, threshold = 10,
+      np <- nearPoints(data_plot(), input$scatterplot_hover, threshold = 10,
                        maxpoints = 1)
       id <- np$id
       if (is.null(id)) {
@@ -155,7 +159,7 @@ shinyServer(
     }, deleteFile = FALSE)
 
     output$info_name <- renderUI({
-      np <- nearPoints(data_pkmn(), input$scatterplot_hover, threshold = 10,
+      np <- nearPoints(data_plot(), input$scatterplot_hover, threshold = 10,
                        maxpoints = 1)
       if (length(np$id) == 0) {
         return("")
@@ -165,16 +169,14 @@ shinyServer(
     })
     
     output$info_variables <- renderText({
-      do.call(paste, c(as.list(names(df)), sep = "\n"))
+      do.call(paste, c(as.list(names(data_plot())), sep = "\n"))
     })
     
     output$info_data <- renderText({
       if (is.null(input$scatterplot_hover)) {
         return("")
       } else {
-        data <- df[as.integer(nearPoints(data_pkmn(), input$scatterplot_hover,
-                                         threshold = 10, maxpoints = 1)[1]), ]
-        do.call(paste, c(nearPoints(data, input$scatterplot_hover,
+        do.call(paste, c(nearPoints(data_plot(), input$scatterplot_hover,
                                     threshold = 10, maxpoints = 1), sep = "\n")) 
       }
     })
